@@ -1,4 +1,5 @@
 const Block = require('./block.js');
+const DIFFICULTY = require('../config.js');
 
 describe('Block',()=>{
   let data,lastBlock,localBlock;
@@ -15,5 +16,14 @@ describe('Block',()=>{
 
   it('set the `lastHash` to match the last hash of the block', ()=>{
     expect(localBlock.lastHash).toEqual(lastBlock.hash);
+  });
+
+  it('DIFFICULTY level check',()=>{
+    expect(localBlock.hash.substring(0,DIFFICULTY)).toEqual('0'.repeat(DIFFICULTY));
+  });
+
+  it('DIFFICULTY dynamic',()=>{
+
+    expect(Block.adjustDifficutly(localBlock,localBlock.timestamp+36000)).toEqual(localBlock.difficutly-1);
   });
 })
