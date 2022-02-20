@@ -7,6 +7,11 @@ class Transaction{
     this.outputs = [];
   }
 
+  /*
+  this function is to update an existing transaction
+  ie. adding more transfers to the same transaction
+  if sender sents amount to multiple receipents
+  */
   update(senderWallet, recipient, amount) {
   const senderOutput = this.outputs.find(output => output.senderAddress === senderWallet.publicKey);
 
@@ -38,9 +43,7 @@ class Transaction{
     ]);
 
     Transaction.signTransaction(newTransaction, senderWallet);
-
     return newTransaction;
-
   }
 
   // sets the input of the transaction
