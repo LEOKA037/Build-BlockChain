@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "3ac8d641-a980-4a2d-beb3-0452bc606c9b",
+		"name": "Blockchain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Blockchain",
+			"item": [
+				{
+					"name": "Transact",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"recipient\": \"recieverTwo\",\r\n        \"amount\": 30\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/transact",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"transact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3002/transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mine transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3002/mine-transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"mine-transactions"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "leo",
+									"disabled": true
+								},
+								{
+									"key": "amount",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Public Key",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3002/public-key",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"public-key"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Blocks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3002/blocks",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"blocks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

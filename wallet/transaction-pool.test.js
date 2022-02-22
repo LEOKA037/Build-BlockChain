@@ -9,8 +9,8 @@ describe('TransactionPool', () => {
   beforeEach(() => {
     tp = new TransactionPool();
     wallet = new Wallet();
-    transaction = Transaction.newTransaction(wallet,'first-reciever', 30);
-    tp.updateOrAddTransaction(transaction);
+    bc = new Blockchain();
+    transaction = wallet.createTransaction('first-reciever', 30, bc, tp);
   });
 
   it('adds a transaction to the pool', () => {
@@ -25,5 +25,35 @@ describe('TransactionPool', () => {
   expect(JSON.stringify(tp.transactions.find(t => t.id === newTransaction.id)))
     .not.toEqual(oldTransaction);
   });
+
+  describe('mixing valid and corrupt transactions', () => {
+      let validTransactions;
+
+      beforeEach(() => {
+        validTransactions = [...tp.transactions];
+        for (let i=0; i<6; i++) {
+          wallet = new Wallet();
+          transaction = wallet.createTransaction('second-reciever', 30, bc, tp);
+          if (i%2==0) {
+            transaction.input.amount = 99999;
+          } else {
+            validTransactions.push(transaction);
+          }
+        }
+      });
+
+      it('shows a difference between valid and corrupt transactions', () => {
+        expect(JSON.stringify(tp.transactions)).not.toEqual(JSON.stringify(validTransactions));
+      });
+
+      it('grabs valid transactions', () => {
+        expect(tp.validTransactions()).toEqual(validTransactions);
+      });
+    });
+
+    it('clears transactions', () => {
+      tp.clear();
+      expect(tp.transactions).toEqual([]);
+    });
 
 })
